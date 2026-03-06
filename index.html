@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Thumb Landscaping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-50 text-green-900 font-sans">
+
+        <!-- Navigation Bar -->
+    <nav class="bg-green-800 text-white p-4 fixed w-full top-0 z-10 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Green Thumb Landscaping</h1>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-green-300">Home</a></li>
+                <li><a href="about.html" class="hover:text-green-300">About</a></li>
+                <li><a href="services.html" class="hover:text-green-300">Services</a></li>
+                <li><a href="gallery.html" class="hover:text-green-300">Gallery</a></li>
+                <li><a href="contact.html" class="hover:text-green-300">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Background Image -->
+    <header class="relative h-screen">
+        <img 
+            src="https://images.unsplash.com/photo-1581092160560-1c1e428e9d65?auto=format&fit=crop&q=80&w=2000" 
+            alt="Beautiful landscaped garden" 
+            class="absolute inset-0 w-full h-full object-cover"
+        >
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div class="text-center text-white px-4">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">Expert Landscaping in Lilongwe</h1>
+                <p class="text-xl md:text-2xl mb-8">Transforming outdoor spaces with care and creativity</p>
+                <a href="contact.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg inline-block">
+                    Get a Free Quote
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quick spacer so content isn't hidden under fixed nav -->
+    <div class="h-20"></div>
+    <!-- Why Choose Us Teaser Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-green-800 mb-8">Why Choose Green Thumb Landscaping?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-green-50 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">10+ Years Experience</h3>
+                    <p class="text-green-900">Serving Lilongwe homes and businesses with reliable, creative landscaping solutions.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-green-50 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Eco-Friendly Practices</h3>
+                    <p class="text-green-900">We use sustainable methods and native plants to create beautiful, low-maintenance gardens.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-green-50 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Satisfaction Guaranteed</h3>
+                    <p class="text-green-900">100% client satisfaction or we make it right – your dream yard is our priority.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">Green Thumb Landscaping</h3>
+            <p class="mb-4">Expert landscaping services in Lilongwe, Malawi</p>
+            
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mb-6">
+                <div>
+                    <p class="font-semibold">Phone / WhatsApp:</p>
+                    <p>+265 999 123 456</p>
+                </div>
+                <div>
+                    <p class="font-semibold">Email:</p>
+                    <p>info@greenthumblandscaping.com</p>
+                </div>
+                <div>
+                    <p class="font-semibold">Location:</p>
+                    <p>Lilongwe, Malawi</p>
+                </div>
+            </div>
+            
+            <p class="text-sm">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
+            <p class="text-xs mt-2">Built with care using free tools</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
