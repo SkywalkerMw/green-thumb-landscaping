@@ -3,130 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Green Thumb Landscaping</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-green-50 text-green-900 font-sans">
+    <title>Services — Green Thumb Landscaping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        :root{--forest:#1a2e1a;--deep:#0f1c0f;--sage:#4a6741;--gold:#c9a84c;--gold-light:#e8c97a;--cream:#f5f0e8;--warm-white:#faf8f4;--text-dark:#1a1a1a;--text-mid:#4a4a4a;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--warm-white);color:var(--text-dark);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 60px;height:80px;display:flex;align-items:center;justify-content:space-between;background:rgba(15,28,15,0.95);backdrop-filter:blur(12px);}
+        .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#fff;letter-spacing:0.05em;text-decoration:none;}
+        .nav-logo span{color:var(--gold);}
+        .nav-links{display:flex;list-style:none;gap:40px;}
+        .nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s;position:relative;}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s;}
+        .nav-links a:hover{color:var(--gold-light);} .nav-links a:hover::after{width:100%;}
 
-    <!-- Navigation Bar (same as other pages) -->
-    <nav class="bg-green-800 text-white p-4 fixed w-full top-0 z-10 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Green Thumb Landscaping</h1>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-green-300">Home</a></li>
-                <li><a href="about.html" class="hover:text-green-300">About</a></li>
-                <li><a href="services.html" class="hover:text-green-300">Services</a></li>
-                <li><a href="gallery.html" class="hover:text-green-300">Gallery</a></li>
-                <li><a href="contact.html" class="hover:text-green-300">Contact</a></li>
-            </ul>
-        </div>
+        .page-hero{padding-top:80px;position:relative;height:480px;overflow:hidden;}
+        .page-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.4);}
+        .page-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,28,15,0.2),rgba(15,28,15,0.75));}
+        .page-hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 80px 80px;}
+        .section-label{font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px;display:block;}
+        .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:300;color:#fff;line-height:1.1;max-width:700px;}
+        .page-title em{font-style:italic;color:var(--gold-light);}
+
+        /* SERVICES CARDS with images */
+        .services-section{padding:100px 80px;background:var(--warm-white);}
+        .service-card{display:grid;grid-template-columns:420px 1fr;gap:0;margin-bottom:2px;background:#e8e2d8;min-height:320px;}
+        .service-card:nth-child(even){grid-template-columns:1fr 420px;}
+        .service-card-image{overflow:hidden;position:relative;}
+        .service-card-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s;filter:brightness(0.85);}
+        .service-card:hover .service-card-image img{transform:scale(1.04);filter:brightness(1);}
+        .service-card-image-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,28,15,0.3) 0%,transparent 60%);}
+        .service-card-body{background:var(--warm-white);padding:60px 64px;display:flex;flex-direction:column;justify-content:center;}
+        .service-card:nth-child(even) .service-card-image{order:2;}
+        .service-card:nth-child(even) .service-card-body{order:1;}
+        .service-num{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);opacity:0.7;margin-bottom:12px;letter-spacing:0.1em;}
+        .service-card-body h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;color:var(--forest);margin-bottom:16px;line-height:1.15;}
+        .service-card-body p{font-size:0.82rem;color:var(--text-mid);line-height:2;margin-bottom:20px;}
+        .service-price{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+
+        /* FEATURED BAND */
+        .featured-band{background:var(--forest);padding:80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+        .featured-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:#fff;line-height:1.2;}
+        .featured-band h2 em{font-style:italic;color:var(--gold-light);}
+        .featured-band p{font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:2;margin-top:20px;}
+        .btn-primary{display:inline-block;padding:16px 44px;background:var(--gold);color:var(--deep);font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:background 0.3s,transform 0.3s;margin-top:36px;}
+        .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+        .featured-list{list-style:none;}
+        .featured-list li{display:flex;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:0.8rem;color:rgba(255,255,255,0.75);letter-spacing:0.05em;}
+        .featured-list li::before{content:'◆';font-size:0.45rem;color:var(--gold);flex-shrink:0;}
+
+        footer{background:var(--deep);padding:80px;}
+        .footer-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:50px;}
+        .footer-brand{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;}
+        .footer-brand span{color:var(--gold);}
+        .footer-tagline{font-size:0.7rem;color:rgba(255,255,255,0.35);letter-spacing:0.15em;margin-top:8px;}
+        .footer-contacts{display:flex;gap:80px;}
+        .footer-col label{display:block;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+        .footer-col p{font-size:0.8rem;color:rgba(255,255,255,0.7);line-height:1.8;}
+        .footer-bottom{display:flex;justify-content:space-between;align-items:center;}
+        .footer-nav{display:flex;gap:36px;list-style:none;}
+        .footer-nav a{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.3s;}
+        .footer-nav a:hover{color:var(--gold);}
+        .footer-copy{font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.1em;}
+
+        @media(max-width:1100px){
+            .service-card{grid-template-columns:1fr!important;grid-template-rows:260px auto;}
+            .service-card:nth-child(even) .service-card-image,.service-card:nth-child(even) .service-card-body{order:unset;}
+            .service-card-body{padding:48px 40px;}
+        }
+        @media(max-width:900px){
+            nav{padding:0 24px;} .nav-links{gap:20px;}
+            .page-hero{height:350px;} .page-hero-content{padding:0 32px 60px;}
+            .services-section{padding:60px 24px;}
+            .featured-band{grid-template-columns:1fr;padding:60px 32px;gap:40px;}
+            footer{padding:60px 32px;} .footer-top{flex-direction:column;gap:48px;}
+            .footer-contacts{flex-direction:column;gap:32px;} .footer-bottom{flex-direction:column;gap:24px;}
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">Green<span> Thumb</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Spacer for fixed nav -->
-    <div class="h-20"></div>
-
-    <!-- Services Hero / Intro -->
-    <section class="py-20 bg-white text-center">
-        <div class="container mx-auto px-4">
-            <h1 class="text-5xl font-bold text-green-800 mb-6">Our Landscaping Services</h1>
-            <p class="text-xl max-w-3xl mx-auto">
-                From lush lawns to stunning garden designs, we offer a full range of professional landscaping services tailored to your needs in Lilongwe.
-            </p>
+    <!-- PAGE HERO — Overhead shot of a landscaped garden with geometric beds -->
+    <div class="page-hero">
+        <img class="page-hero-img"
+             src="https://images.unsplash.com/photo-1593096020561-00b8e5177e0d?auto=format&fit=crop&q=85&w=2000"
+             alt="Overhead view of formal garden design"
+             onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=85&w=2000';">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="section-label">What We Offer</span>
+            <h1 class="page-title">Tailored services for <em>exceptional</em> spaces</h1>
         </div>
-    </section>
+    </div>
 
-    <!-- Services Grid -->
-    <section class="py-16 bg-green-100">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                
-                <!-- Service 1 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <div class="text-6xl mb-6">🌿</div>
-                    <h3 class="text-3xl font-bold text-green-700 mb-4">Lawn Care & Maintenance</h3>
-                    <p class="text-lg mb-4">Regular mowing, edging, fertilizing, weed control, and seasonal clean-ups to keep your lawn healthy and green year-round.</p>
-                    <p class="font-semibold text-green-600">Starting from MWK 50,000 per visit</p>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <div class="text-6xl mb-6">🌳</div>
-                    <h3 class="text-3xl font-bold text-green-700 mb-4">Garden Design & Installation</h3>
-                    <p class="text-lg mb-4">Custom garden layouts, flower beds, native plants, hardscaping (paths, patios), and irrigation systems designed for beauty and low maintenance.</p>
-                    <p class="font-semibold text-green-600">Custom quotes – free consultation</p>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <div class="text-6xl mb-6">🪓</div>
-                    <h3 class="text-3xl font-bold text-green-700 mb-4">Tree Trimming & Removal</h3>
-                    <p class="text-lg mb-4">Safe pruning, shaping, stump grinding, and full tree removal services to keep your property safe and looking its best.</p>
-                    <p class="font-semibold text-green-600">Quotes based on site visit</p>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <div class="text-6xl mb-6">🌱</div>
-                    <h3 class="text-3xl font-bold text-green-700 mb-4">Irrigation & Water Features</h3>
-                    <p class="text-lg mb-4">Drip systems, sprinklers, rainwater harvesting, and beautiful ponds/fountains for efficient watering and added ambiance.</p>
-                    <p class="font-semibold text-green-600">Installation & maintenance packages</p>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <div class="text-6xl mb-6">🪴</div>
-                    <h3 class="text-3xl font-bold text-green-700 mb-4">Landscape Maintenance Plans</h3>
-                    <p class="text-lg mb-4">Monthly or quarterly packages for ongoing care — we handle everything so you can enjoy your yard without the work.</p>
-                    <p class="font-semibold text-green-600">Affordable plans starting at MWK 100,000/month</p>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <div class="text-6xl mb-6">🏡</div>
-                    <h3 class="text-3xl font-bold text-green-700 mb-4">Commercial Projects</h3>
-                    <p class="text-lg">Landscaping for offices, schools, hotels, estates — large-scale design, installation, and maintenance for professional spaces.</p>
-                    <p class="font-semibold text-green-600">Tailored commercial quotes</p>
-                </div>
+    <section class="services-section">
 
+        <!-- 1. Lawn Care — striped manicured lawn -->
+        <div class="service-card">
+            <div class="service-card-image">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=85&w=900"
+                     alt="Perfectly manicured striped lawn">
+                <div class="service-card-image-overlay"></div>
+            </div>
+            <div class="service-card-body">
+                <span class="service-num">01 — Lawn Care</span>
+                <h3>Lawn Care &amp; Maintenance</h3>
+                <p>Regular mowing, edging, fertilizing, weed control, and seasonal clean-ups to keep your lawn healthy and immaculate year-round. A pristine lawn is the foundation of every great garden.</p>
+                <span class="service-price">Starting from MWK 50,000 per visit</span>
             </div>
         </div>
-    </section>
 
-    <!-- Call to Action -->
-    <section class="py-16 bg-green-800 text-white text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-6">Ready to Transform Your Outdoor Space?</h2>
-            <p class="text-xl mb-8">Contact us today for a free consultation and quote.</p>
-            <a href="contact.html" class="bg-white text-green-800 font-bold py-4 px-10 rounded-lg text-lg hover:bg-gray-100 inline-block">
-                Get Your Free Quote
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer (same as other pages) -->
-    <footer class="bg-green-900 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">Green Thumb Landscaping</h3>
-            <p class="mb-4">Expert landscaping services in Lilongwe, Malawi</p>
-            
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mb-6">
-                <div>
-                    <p class="font-semibold">Phone / WhatsApp:</p>
-                    <p>+265 999 123 456</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Email:</p>
-                    <p>info@greenthumblandscaping.com</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Location:</p>
-                    <p>Lilongwe, Malawi</p>
-                </div>
+        <!-- 2. Garden Design — colourful designed garden -->
+        <div class="service-card">
+            <div class="service-card-image">
+                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=85&w=900"
+                     alt="Designed garden with flower beds and stone path">
+                <div class="service-card-image-overlay"></div>
             </div>
-            
-            <p class="text-sm">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
+            <div class="service-card-body">
+                <span class="service-num">02 — Design</span>
+                <h3>Garden Design &amp; Installation</h3>
+                <p>Custom garden layouts, curated flower beds, native plants, hardscaping (paths, patios, retaining walls) and irrigation systems designed for beauty and ease of maintenance.</p>
+                <span class="service-price">Bespoke — Free consultation</span>
+            </div>
+        </div>
+
+        <!-- 3. Tree Trimming — trees with structured shapes -->
+        <div class="service-card">
+            <div class="service-card-image">
+                <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&q=85&w=900"
+                     alt="Trees being expertly shaped and maintained">
+                <div class="service-card-image-overlay"></div>
+            </div>
+            <div class="service-card-body">
+                <span class="service-num">03 — Trees</span>
+                <h3>Tree Trimming &amp; Removal</h3>
+                <p>Safe and expert pruning, shaping, stump grinding, and full tree removal services to keep your property safe, structured, and looking its best through every season.</p>
+                <span class="service-price">Pricing on site visit</span>
+            </div>
+        </div>
+
+        <!-- 4. Irrigation — sprinkler/water in garden -->
+        <div class="service-card">
+            <div class="service-card-image">
+                <img src="https://images.unsplash.com/photo-1628413993884-87f4dfd5a4bf?auto=format&fit=crop&q=85&w=900"
+                     alt="Garden irrigation and water feature"
+                     onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=85&w=900';">
+                <div class="service-card-image-overlay"></div>
+            </div>
+            <div class="service-card-body">
+                <span class="service-num">04 — Irrigation</span>
+                <h3>Irrigation &amp; Water Features</h3>
+                <p>Drip systems, sprinklers, rainwater harvesting, and beautifully crafted ponds and fountains — efficient, sustainable watering solutions with ambient water features.</p>
+                <span class="service-price">Install &amp; maintenance packages</span>
+            </div>
+        </div>
+
+        <!-- 5. Maintenance Plans — beautiful estate grounds -->
+        <div class="service-card">
+            <div class="service-card-image">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=85&w=900"
+                     alt="Well-maintained private garden estate"
+                     onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=85&w=900';">
+                <div class="service-card-image-overlay"></div>
+            </div>
+            <div class="service-card-body">
+                <span class="service-num">05 — Plans</span>
+                <h3>Landscape Maintenance Plans</h3>
+                <p>Monthly or quarterly ongoing care packages — we handle everything so you enjoy your outdoor space without lifting a finger. The effortless garden you've always wanted.</p>
+                <span class="service-price">From MWK 100,000 / month</span>
+            </div>
+        </div>
+
+        <!-- 6. Commercial — large grounds / estate -->
+        <div class="service-card">
+            <div class="service-card-image">
+                <img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=85&w=900"
+                     alt="Commercial property with well-kept grounds"
+                     onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=85&w=900';">
+                <div class="service-card-image-overlay"></div>
+            </div>
+            <div class="service-card-body">
+                <span class="service-num">06 — Commercial</span>
+                <h3>Commercial Estate Projects</h3>
+                <p>Large-scale design, installation, and maintenance for offices, schools, hotels, and private estates. Professional environments deserve professional outdoor spaces.</p>
+                <span class="service-price">Tailored commercial quotes</span>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="featured-band">
+        <div>
+            <span class="section-label" style="color:var(--gold);">Not Sure Where to Start?</span>
+            <h2>Let us design the <em>perfect plan</em> for your property</h2>
+            <p>Every space is unique. Book a free no-obligation site consultation and we'll recommend the right combination of services to bring your vision to life.</p>
+            <a href="contact.html" class="btn-primary">Book a Free Consultation</a>
+        </div>
+        <ul class="featured-list">
+            <li>Free initial consultation and site visit</li>
+            <li>Detailed written quote within 48 hours</li>
+            <li>Flexible scheduling to suit your timetable</li>
+            <li>Fully insured and professionally equipped team</li>
+            <li>Ongoing support after every project completion</li>
+            <li>Eco-conscious methods as standard</li>
+        </ul>
+    </div>
+
+    <footer>
+        <div class="footer-top">
+            <div><div class="footer-brand">Green <span>Thumb</span> Landscaping</div><p class="footer-tagline">Exceptional outdoor environments — Lilongwe, Malawi</p></div>
+            <div class="footer-contacts">
+                <div class="footer-col"><label>Phone / WhatsApp</label><p>+265 999 123 456</p></div>
+                <div class="footer-col"><label>Email</label><p>info@greenthumblandscaping.com</p></div>
+                <div class="footer-col"><label>Location</label><p>Lilongwe, Malawi</p></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-nav">
+                <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li><li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
         </div>
     </footer>
-
 </body>
 </html>

@@ -3,166 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Green Thumb Landscaping</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-green-50 text-green-900 font-sans">
+    <title>Gallery — Green Thumb Landscaping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        :root{--forest:#1a2e1a;--deep:#0f1c0f;--sage:#4a6741;--gold:#c9a84c;--gold-light:#e8c97a;--cream:#f5f0e8;--warm-white:#faf8f4;--text-dark:#1a1a1a;--text-mid:#4a4a4a;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--deep);color:#fff;font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 60px;height:80px;display:flex;align-items:center;justify-content:space-between;background:rgba(15,28,15,0.95);backdrop-filter:blur(12px);}
+        .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#fff;letter-spacing:0.05em;text-decoration:none;}
+        .nav-logo span{color:var(--gold);}
+        .nav-links{display:flex;list-style:none;gap:40px;}
+        .nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s;position:relative;}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s;}
+        .nav-links a:hover{color:var(--gold-light);} .nav-links a:hover::after{width:100%;}
 
-    <!-- Navigation Bar (same as other pages) -->
-    <nav class="bg-green-800 text-white p-4 fixed w-full top-0 z-10 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Green Thumb Landscaping</h1>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-green-300">Home</a></li>
-                <li><a href="about.html" class="hover:text-green-300">About</a></li>
-                <li><a href="services.html" class="hover:text-green-300">Services</a></li>
-                <li><a href="gallery.html" class="hover:text-green-300">Gallery</a></li>
-                <li><a href="contact.html" class="hover:text-green-300">Contact</a></li>
-            </ul>
-        </div>
+        .page-hero{padding-top:80px;position:relative;height:520px;overflow:hidden;}
+        .page-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.38);}
+        .page-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,28,15,0.1),rgba(15,28,15,0.8));}
+        .page-hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 80px 80px;}
+        .section-label{font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px;display:block;}
+        .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:300;color:#fff;line-height:1.1;max-width:700px;}
+        .page-title em{font-style:italic;color:var(--gold-light);}
+
+        /* MASONRY GALLERY */
+        .gallery-section{padding:60px 40px 120px;background:var(--deep);}
+        .gallery-grid{columns:3;column-gap:14px;margin-top:40px;}
+        .gallery-item{break-inside:avoid;margin-bottom:14px;position:relative;overflow:hidden;cursor:pointer;}
+        .gallery-item img{width:100%;display:block;object-fit:cover;transition:transform 0.6s ease,filter 0.4s;filter:brightness(0.82);}
+        /* Vary heights for rhythm */
+        .gallery-item:nth-child(1) img{height:360px;}
+        .gallery-item:nth-child(2) img{height:280px;}
+        .gallery-item:nth-child(3) img{height:420px;}
+        .gallery-item:nth-child(4) img{height:300px;}
+        .gallery-item:nth-child(5) img{height:500px;}
+        .gallery-item:nth-child(6) img{height:280px;}
+        .gallery-item:nth-child(7) img{height:340px;}
+        .gallery-item:nth-child(8) img{height:380px;}
+        .gallery-item:nth-child(9) img{height:260px;}
+        .gallery-item:hover img{transform:scale(1.04);filter:brightness(1);}
+        .gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:44px 24px 24px;background:linear-gradient(to top,rgba(10,20,10,0.92) 0%,transparent 100%);transform:translateY(8px);opacity:0;transition:all 0.4s ease;}
+        .gallery-item:hover .gallery-caption{opacity:1;transform:translateY(0);}
+        .gallery-caption h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#fff;margin-bottom:4px;}
+        .gallery-caption p{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);}
+        .gallery-border{position:absolute;inset:0;border:1px solid transparent;transition:border-color 0.4s;pointer-events:none;}
+        .gallery-item:hover .gallery-border{border-color:rgba(201,168,76,0.45);}
+
+        /* CTA */
+        .cta-section{padding:120px 80px;background:var(--forest);text-align:center;}
+        .cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:#fff;margin-bottom:20px;}
+        .cta-section h2 em{font-style:italic;color:var(--gold-light);}
+        .cta-section p{font-size:0.82rem;color:rgba(255,255,255,0.6);margin-bottom:48px;letter-spacing:0.05em;}
+        .btn-primary{display:inline-block;padding:16px 44px;background:var(--gold);color:var(--deep);font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:background 0.3s,transform 0.3s;}
+        .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+
+        footer{background:var(--deep);padding:80px;border-top:1px solid rgba(255,255,255,0.06);}
+        .footer-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:50px;}
+        .footer-brand{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;}
+        .footer-brand span{color:var(--gold);}
+        .footer-tagline{font-size:0.7rem;color:rgba(255,255,255,0.35);letter-spacing:0.15em;margin-top:8px;}
+        .footer-contacts{display:flex;gap:80px;}
+        .footer-col label{display:block;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+        .footer-col p{font-size:0.8rem;color:rgba(255,255,255,0.7);line-height:1.8;}
+        .footer-bottom{display:flex;justify-content:space-between;align-items:center;}
+        .footer-nav{display:flex;gap:36px;list-style:none;}
+        .footer-nav a{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.3s;}
+        .footer-nav a:hover{color:var(--gold);}
+        .footer-copy{font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.1em;}
+
+        @media(max-width:900px){
+            nav{padding:0 24px;} .nav-links{gap:20px;}
+            .page-hero{height:360px;} .page-hero-content{padding:0 32px 60px;}
+            .gallery-section{padding:40px 20px 80px;} .gallery-grid{columns:2;}
+            .gallery-item img{height:220px!important;}
+            .cta-section{padding:80px 32px;}
+            footer{padding:60px 32px;} .footer-top{flex-direction:column;gap:48px;}
+            .footer-contacts{flex-direction:column;gap:32px;} .footer-bottom{flex-direction:column;gap:24px;}
+        }
+        @media(max-width:580px){.gallery-grid{columns:1;} .gallery-item img{height:260px!important;}}
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">Green<span> Thumb</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Spacer for fixed nav -->
-    <div class="h-20"></div>
+    <!-- PAGE HERO — Aerial view of formal garden with lush geometric hedges -->
+    <div class="page-hero">
+        <img class="page-hero-img"
+             src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=85&w=2000"
+             alt="Beautiful formal garden from above">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="section-label">Our Portfolio</span>
+            <h1 class="page-title">A collection of <em>remarkable</em><br>outdoor spaces</h1>
+        </div>
+    </div>
 
-    <!-- Gallery Hero / Intro -->
-    <section class="py-20 bg-white text-center">
-        <div class="container mx-auto px-4">
-            <h1 class="text-5xl font-bold text-green-800 mb-6">Our Work Gallery</h1>
-            <p class="text-xl max-w-3xl mx-auto">
-                Take a look at some of our recent landscaping projects in Lilongwe. From modern gardens to lush lawns — we deliver results you can see.
-            </p>
+    <section class="gallery-section">
+        <div class="gallery-grid">
+
+            <!-- 1 — Formal garden with stone pathway and manicured hedges -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=85&w=800" alt="Modern backyard with stone path">
+                <div class="gallery-caption"><h3>Modern Backyard Oasis</h3><p>Lilongwe residential · 2025</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 2 — Lush lawn with perfect stripes -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=85&w=800" alt="Manicured residential lawn">
+                <div class="gallery-caption"><h3>Lush Residential Lawn</h3><p>Area 47 · Full maintenance</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 3 — Tree-lined garden path / avenue -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&q=85&w=800" alt="Tree-lined garden pathway">
+                <div class="gallery-caption"><h3>Tree-Lined Pathway</h3><p>Office compound landscaping</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 4 — Elegant private patio with plants -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=85&w=800" alt="Private luxury patio area">
+                <div class="gallery-caption"><h3>Private Patio Design</h3><p>Family entertainment area</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 5 — Beautiful tropical garden with palms -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=85&w=800" alt="Lush tropical garden landscape">
+                <div class="gallery-caption"><h3>Tropical Garden Install</h3><p>Private estate · Full design</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 6 — Colourful flower beds and borders -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=85&w=800" alt="Colourful garden flower beds">
+                <div class="gallery-caption"><h3>Floral Garden Borders</h3><p>Residential · Area 12</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 7 — Sprinkler irrigation on green lawn -->
+            <div class="gallery-item">
+                <img src="https://images.pexels.com/photos/4397899/pexels-photo-4397899.jpeg?auto=compress&cs=tinysrgb&w=800"
+                     alt="Garden sprinkler irrigation system on green lawn"
+                     onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=85&w=800';">
+                <div class="gallery-caption"><h3>Smart Irrigation Install</h3><p>Eco water-saving system</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 8 — Commercial / hotel property grounds -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=85&w=800"
+                     alt="Commercial property landscaping"
+                     onerror="this.src='https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=85&w=800';">
+                <div class="gallery-caption"><h3>Commercial Estate Grounds</h3><p>Large-scale maintenance contract</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
+            <!-- 9 — Clean edging and details close-up -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1593096020561-00b8e5177e0d?auto=format&fit=crop&q=85&w=800"
+                     alt="Precise garden edging and detail"
+                     onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=85&w=800';">
+                <div class="gallery-caption"><h3>Precision Edging Detail</h3><p>Finishing &amp; detailing work</p></div>
+                <div class="gallery-border"></div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Photo Grid -->
-    <section class="py-16 bg-green-100">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Photo 1 -->
-                <div class="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <img 
-                        src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=800" 
-                        alt="Modern garden with stone path" 
-                        class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-onerror="this.src='https://via.placeholder.com/800x600/4ade80/ffffff?text=Project+Photo';"
-                    >
-                    <div class="p-4 bg-white">
-                        <h3 class="text-xl font-semibold text-green-700">Modern Backyard Oasis</h3>
-                        <p class="text-sm text-gray-600">Lilongwe residential project, 2025</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 2 -->
-                <div class="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <img 
-                                                src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=800"  
-                        alt="Lush green lawn with flower beds" 
-                        class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-onerror="this.src='https://via.placeholder.com/800x600/4ade80/ffffff?text=Project+Photo';"
-                    >
-                    <div class="p-4 bg-white">
-                        <h3 class="text-xl font-semibold text-green-700">Lush Residential Lawn</h3>
-                        <p class="text-sm text-gray-600">Area 47 home, full maintenance</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 3 -->
-                <div class="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <img 
-                        src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&q=80&w=800" 
-                        alt="Tree-lined garden path" 
-                        class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-onerror="this.src='https://via.placeholder.com/800x600/4ade80/ffffff?text=Project+Photo';"
-                    >
-                    <div class="p-4 bg-white">
-                        <h3 class="text-xl font-semibold text-green-700">Tree-Lined Pathway</h3>
-                        <p class="text-sm text-gray-600">Office compound landscaping</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 4 -->
-                <div class="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <img 
-                        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" 
-                        alt="Patio with outdoor seating" 
-                        class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-onerror="this.src='https://via.placeholder.com/800x600/4ade80/ffffff?text=Project+Photo';"
-                    >
-                    <div class="p-4 bg-white">
-                        <h3 class="text-xl font-semibold text-green-700">Cozy Patio Design</h3>
-                        <p class="text-sm text-gray-600">Family home entertainment area</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 5 -->
-                <div class="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <img 
-                                                                                                src="https://images.pexels.com/photos/4397899/pexels-photo-4397899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"       
-                        alt="Irrigation system in garden" 
-                        class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-onerror="this.src='https://via.placeholder.com/800x600/4ade80/ffffff?text=Project+Photo';"
-                    >
-                    <div class="p-4 bg-white">
-                        <h3 class="text-xl font-semibold text-green-700">Smart Irrigation Install</h3>
-                        <p class="text-sm text-gray-600">Eco-friendly water-saving setup</p>
-                    </div>
-                </div>
-                
-                <!-- Photo 6 -->
-                <div class="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
-                    <img 
-                                                                       src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80&w=800"  
-                        alt="Commercial landscape project" 
-                        class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-onerror="this.src='https://via.placeholder.com/800x600/4ade80/ffffff?text=Project+Photo';"
-                    >
-                    <div class="p-4 bg-white">
-                        <h3 class="text-xl font-semibold text-green-700">Commercial Estate Grounds</h3>
-                        <p class="text-sm text-gray-600">Large-scale maintenance contract</p>
-                    </div>
-                </div>
+    <section class="cta-section">
+        <h2>Inspired by what you <em>see</em>?</h2>
+        <p>Let us create something extraordinary for your property. Every project is unique — and so is every quote.</p>
+        <a href="contact.html" class="btn-primary">Request a Project Quote</a>
+    </section>
 
+    <footer>
+        <div class="footer-top">
+            <div><div class="footer-brand">Green <span>Thumb</span> Landscaping</div><p class="footer-tagline">Exceptional outdoor environments — Lilongwe, Malawi</p></div>
+            <div class="footer-contacts">
+                <div class="footer-col"><label>Phone / WhatsApp</label><p>+265 999 123 456</p></div>
+                <div class="footer-col"><label>Email</label><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ec85828a83ac8b9e898982988499818e808d82889f8f8d9c85828bc28f8381">[email&#160;protected]</a></p></div>
+                <div class="footer-col"><label>Location</label><p>Lilongwe, Malawi</p></div>
             </div>
         </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-16 bg-green-800 text-white text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-6">Inspired by What You See?</h2>
-            <p class="text-xl mb-8">Let us create something beautiful for your space.</p>
-            <a href="contact.html" class="bg-white text-green-800 font-bold py-4 px-10 rounded-lg text-lg hover:bg-gray-100 inline-block">
-                Request a Project Quote
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer (same as other pages) -->
-    <footer class="bg-green-900 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">Green Thumb Landscaping</h3>
-            <p class="mb-4">Expert landscaping services in Lilongwe, Malawi</p>
-            
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mb-6">
-                <div>
-                    <p class="font-semibold">Phone / WhatsApp:</p>
-                    <p>+265 999 123 456</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Email:</p>
-                    <p>info@greenthumblandscaping.com</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Location:</p>
-                    <p>Lilongwe, Malawi</p>
-                </div>
-            </div>
-            
-            <p class="text-sm">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+        <div class="footer-bottom">
+            <ul class="footer-nav">
+                <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li><li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+         

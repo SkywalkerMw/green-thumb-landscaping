@@ -3,95 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Thumb Landscaping</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-green-50 text-green-900 font-sans">
+    <title>Green Thumb Landscaping — Lilongwe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --forest: #1a2e1a; --deep: #0f1c0f; --sage: #4a6741;
+            --gold: #c9a84c; --gold-light: #e8c97a; --cream: #f5f0e8;
+            --warm-white: #faf8f4; --text-dark: #1a1a1a; --text-mid: #4a4a4a;
+        }
+        html { scroll-behavior: smooth; }
+        body { background: var(--warm-white); color: var(--text-dark); font-family: 'Montserrat', sans-serif; font-weight: 300; overflow-x: hidden; }
 
-        <!-- Navigation Bar -->
-    <nav class="bg-green-800 text-white p-4 fixed w-full top-0 z-10 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Green Thumb Landscaping</h1>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-green-300">Home</a></li>
-                <li><a href="about.html" class="hover:text-green-300">About</a></li>
-                <li><a href="services.html" class="hover:text-green-300">Services</a></li>
-                <li><a href="gallery.html" class="hover:text-green-300">Gallery</a></li>
-                <li><a href="contact.html" class="hover:text-green-300">Contact</a></li>
-            </ul>
-        </div>
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 60px; height: 80px; display: flex; align-items: center; justify-content: space-between; background: transparent; transition: background 0.5s, backdrop-filter 0.5s; }
+        nav.scrolled { background: rgba(15,28,15,0.95); backdrop-filter: blur(12px); }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: #fff; letter-spacing: 0.05em; text-decoration: none; }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; list-style: none; gap: 40px; }
+        .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--gold-light); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .hero { position: relative; height: 100vh; min-height: 700px; overflow: hidden; }
+        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 12s ease-out forwards; }
+        @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1); } }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15,28,15,0.2) 0%, rgba(15,28,15,0.5) 55%, rgba(15,28,15,0.9) 100%); }
+        .hero-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 80px 100px; }
+        .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 20px; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
+        .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 300; color: #fff; line-height: 1.05; max-width: 820px; opacity: 0; animation: fadeUp 1s 0.6s forwards; }
+        .hero-title em { font-style: italic; color: var(--gold-light); }
+        .hero-sub { margin-top: 24px; font-size: 0.85rem; color: rgba(255,255,255,0.7); letter-spacing: 0.08em; max-width: 500px; line-height: 1.9; opacity: 0; animation: fadeUp 1s 0.9s forwards; }
+        .hero-cta { margin-top: 48px; display: flex; gap: 20px; align-items: center; opacity: 0; animation: fadeUp 1s 1.2s forwards; }
+        .btn-primary { display: inline-block; padding: 16px 44px; background: var(--gold); color: var(--deep); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: background 0.3s, transform 0.3s; }
+        .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+        .btn-ghost { display: inline-block; padding: 16px 44px; border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: border-color 0.3s, color 0.3s; }
+        .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+        .hero-scroll { position: absolute; bottom: 40px; right: 80px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(255,255,255,0.4); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; z-index: 2; }
+        .hero-scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); animation: scrollPulse 2s infinite; }
+        @keyframes scrollPulse { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+
+        .marquee-strip { background: var(--forest); padding: 18px 0; overflow: hidden; border-top: 1px solid rgba(201,168,76,0.2); border-bottom: 1px solid rgba(201,168,76,0.2); }
+        .marquee-track { display: flex; gap: 60px; animation: marquee 30s linear infinite; white-space: nowrap; }
+        .marquee-track span { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.5); flex-shrink: 0; }
+        .marquee-track .dot { color: var(--gold); font-size: 0.5rem; flex-shrink: 0; }
+        @keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+        /* FEATURE STRIP */
+        .feature-strip { display: grid; grid-template-columns: repeat(3, 1fr); height: 480px; }
+        .feature-cell { position: relative; overflow: hidden; }
+        .feature-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; filter: brightness(0.72); }
+        .feature-cell:hover img { transform: scale(1.06); filter: brightness(0.88); }
+        .feature-cell-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 36px 32px; background: linear-gradient(to top, rgba(10,20,10,0.88) 0%, transparent 65%); }
+        .feature-cell-tag { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+        .feature-cell h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: #fff; line-height: 1.2; }
+        .feature-cell p { font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-top: 6px; letter-spacing: 0.05em; }
+
+        /* WHY US */
+        .section-why { padding: 140px 80px; background: var(--warm-white); }
+        .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 20px; display: block; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; color: var(--forest); line-height: 1.15; margin-bottom: 80px; max-width: 560px; }
+        .section-title em { font-style: italic; color: var(--sage); }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e0dbd0; }
+        .why-card { background: var(--warm-white); padding: 60px 48px; transition: background 0.4s; }
+        .why-card:hover { background: var(--cream); }
+        .why-number { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(201,168,76,0.18); line-height: 1; margin-bottom: 24px; }
+        .why-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--forest); margin-bottom: 16px; }
+        .why-card p { font-size: 0.8rem; color: var(--text-mid); line-height: 1.9; }
+
+        /* BANNER */
+        .banner { position: relative; height: 520px; overflow: hidden; }
+        .banner img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55); }
+        .banner-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 40px; }
+        .banner-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; color: #fff; line-height: 1.15; max-width: 700px; }
+        .banner-text h2 em { font-style: italic; color: var(--gold-light); }
+        .banner-text p { font-size: 0.8rem; color: rgba(255,255,255,0.65); letter-spacing: 0.1em; margin-top: 16px; }
+        .banner-text .btn-primary { margin-top: 36px; }
+
+        footer { background: var(--deep); padding: 80px; }
+        .footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 50px; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: #fff; }
+        .footer-brand span { color: var(--gold); }
+        .footer-tagline { font-size: 0.7rem; color: rgba(255,255,255,0.35); letter-spacing: 0.15em; margin-top: 8px; }
+        .footer-contacts { display: flex; gap: 80px; }
+        .footer-col label { display: block; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+        .footer-col p { font-size: 0.8rem; color: rgba(255,255,255,0.7); line-height: 1.8; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .footer-nav { display: flex; gap: 36px; list-style: none; }
+        .footer-nav a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+        .footer-nav a:hover { color: var(--gold); }
+        .footer-copy { font-size: 0.65rem; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; }
+
+        @media (max-width: 900px) {
+            nav { padding: 0 24px; } .nav-links { gap: 20px; }
+            .hero-content { padding: 0 32px 80px; } .hero-scroll { right: 32px; }
+            .feature-strip { grid-template-columns: 1fr; height: auto; }
+            .feature-cell { height: 300px; }
+            .section-why { padding: 80px 32px; } .why-grid { grid-template-columns: 1fr; }
+            .banner { height: 380px; }
+            footer { padding: 60px 32px; }
+            .footer-top { flex-direction: column; gap: 48px; }
+            .footer-contacts { flex-direction: column; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 24px; text-align: center; }
+            .footer-nav { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">Green<span> Thumb</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section with Background Image -->
-    <header class="relative h-screen">
-        <img 
-            src="https://images.unsplash.com/photo-1581092160560-1c1e428e9d65?auto=format&fit=crop&q=80&w=2000" 
-            alt="Beautiful landscaped garden" 
-            class="absolute inset-0 w-full h-full object-cover"
-        >
-        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-            <div class="text-center text-white px-4">
-                <h1 class="text-5xl md:text-6xl font-bold mb-4">Expert Landscaping in Lilongwe</h1>
-                <p class="text-xl md:text-2xl mb-8">Transforming outdoor spaces with care and creativity</p>
-                <a href="contact.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg inline-block">
-                    Get a Free Quote
-                </a>
+    <!-- HERO — Wide-angle lush garden with vibrant greens and morning light -->
+    <section class="hero">
+        <img class="hero-img"
+            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=90&w=2400"
+            alt="Sweeping luxury garden at sunrise">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Lilongwe, Malawi — Est. 2015</p>
+            <h1 class="hero-title">Where <em>nature</em> meets<br>exceptional design</h1>
+            <p class="hero-sub">Bespoke landscaping for discerning homeowners and estates. We craft outdoor environments of rare beauty and lasting quality.</p>
+            <div class="hero-cta">
+                <a href="contact.html" class="btn-primary">Request a Consultation</a>
+                <a href="gallery.html" class="btn-ghost">View Our Work</a>
             </div>
         </div>
-    </header>
+        <div class="hero-scroll"><div class="hero-scroll-line"></div><span>Scroll</span></div>
+    </section>
 
-    <!-- Quick spacer so content isn't hidden under fixed nav -->
-    <div class="h-20"></div>
-    <!-- Why Choose Us Teaser Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold text-green-800 mb-8">Why Choose Green Thumb Landscaping?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-green-50 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-2xl font-semibold text-green-700 mb-4">10+ Years Experience</h3>
-                    <p class="text-green-900">Serving Lilongwe homes and businesses with reliable, creative landscaping solutions.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-green-50 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Eco-Friendly Practices</h3>
-                    <p class="text-green-900">We use sustainable methods and native plants to create beautiful, low-maintenance gardens.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-green-50 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                    <h3 class="text-2xl font-semibold text-green-700 mb-4">Satisfaction Guaranteed</h3>
-                    <p class="text-green-900">100% client satisfaction or we make it right – your dream yard is our priority.</p>
-                </div>
+    <div class="marquee-strip">
+        <div class="marquee-track">
+            <span>Luxury Garden Design</span><span class="dot">◆</span>
+            <span>Bespoke Landscaping</span><span class="dot">◆</span>
+            <span>Lawn &amp; Maintenance</span><span class="dot">◆</span>
+            <span>Irrigation Systems</span><span class="dot">◆</span>
+            <span>Commercial Estates</span><span class="dot">◆</span>
+            <span>Tree Management</span><span class="dot">◆</span>
+            <span>Water Features</span><span class="dot">◆</span>
+            <span>Lilongwe, Malawi</span><span class="dot">◆</span>
+            <span>Luxury Garden Design</span><span class="dot">◆</span>
+            <span>Bespoke Landscaping</span><span class="dot">◆</span>
+            <span>Lawn &amp; Maintenance</span><span class="dot">◆</span>
+            <span>Irrigation Systems</span><span class="dot">◆</span>
+            <span>Commercial Estates</span><span class="dot">◆</span>
+            <span>Tree Management</span><span class="dot">◆</span>
+            <span>Water Features</span><span class="dot">◆</span>
+            <span>Lilongwe, Malawi</span><span class="dot">◆</span>
+        </div>
+    </div>
+
+    <!-- SERVICE PREVIEW STRIP -->
+    <div class="feature-strip">
+        <!-- Manicured striped lawn with perfect edges -->
+        <div class="feature-cell">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=85&w=900"
+                 alt="Manicured striped lawn">
+            <div class="feature-cell-overlay">
+                <span class="feature-cell-tag">Service</span>
+                <h3>Lawn Care &amp; Maintenance</h3>
+                <p>Precision mowing, edging &amp; year-round care</p>
+            </div>
+        </div>
+        <!-- Designed garden with colourful beds and stone path -->
+        <div class="feature-cell">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=85&w=900"
+                 alt="Beautiful garden with flower beds and stone path">
+            <div class="feature-cell-overlay">
+                <span class="feature-cell-tag">Service</span>
+                <h3>Garden Design &amp; Installation</h3>
+                <p>Custom layouts tailored to your vision</p>
+            </div>
+        </div>
+        <!-- Elegant private patio with outdoor furniture and greenery -->
+        <div class="feature-cell">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=85&w=900"
+                 alt="Elegant private patio garden">
+            <div class="feature-cell-overlay">
+                <span class="feature-cell-tag">Service</span>
+                <h3>Patios &amp; Outdoor Living</h3>
+                <p>Entertaining spaces built to impress</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="section-why">
+        <span class="section-label">Why Choose Us</span>
+        <h2 class="section-title">A standard of <em>excellence</em><br>cultivated over a decade</h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-number">01</div>
+                <h3>10+ Years of Mastery</h3>
+                <p>Over a decade serving Lilongwe's finest homes and commercial properties with landscaping solutions that endure and impress.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-number">02</div>
+                <h3>Eco-Conscious Methods</h3>
+                <p>We work with Malawi's native flora and sustainable water systems — gardens that are beautiful, resilient, and responsible.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-number">03</div>
+                <h3>Guaranteed Satisfaction</h3>
+                <p>Every project is delivered to the highest standard. We stand behind our work — completely, without compromise.</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-green-900 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">Green Thumb Landscaping</h3>
-            <p class="mb-4">Expert landscaping services in Lilongwe, Malawi</p>
-            
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mb-6">
-                <div>
-                    <p class="font-semibold">Phone / WhatsApp:</p>
-                    <p>+265 999 123 456</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Email:</p>
-                    <p>info@greenthumblandscaping.com</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Location:</p>
-                    <p>Lilongwe, Malawi</p>
-                </div>
+    <!-- BANNER — Dramatic close-up of lush tropical foliage -->
+    <div class="banner">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=85&w=2400"
+             alt="Lush tropical landscape at golden hour">
+        <div class="banner-text">
+            <h2>Your dream garden<br>is <em>closer than you think</em></h2>
+            <p>Free consultations · Tailored designs · Lasting results</p>
+            <a href="contact.html" class="btn-primary">Get a Free Quote</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand">Green <span>Thumb</span> Landscaping</div>
+                <p class="footer-tagline">Exceptional outdoor environments — Lilongwe, Malawi</p>
             </div>
-            
-            <p class="text-sm">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
-            <p class="text-xs mt-2">Built with care using free tools</p>
+            <div class="footer-contacts">
+                <div class="footer-col"><label>Phone / WhatsApp</label><p>+265 999 123 456</p></div>
+                <div class="footer-col"><label>Email</label><p>info@greenthumblandscaping.com</p></div>
+                <div class="footer-col"><label>Location</label><p>Lilongwe, Malawi</p></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
         </div>
     </footer>
 
-
+    <script>
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+    </script>
 </body>
 </html>

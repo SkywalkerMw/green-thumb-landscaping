@@ -3,153 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Green Thumb Landscaping</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-green-50 text-green-900 font-sans">
+    <title>Contact — Green Thumb Landscaping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        :root{--forest:#1a2e1a;--deep:#0f1c0f;--sage:#4a6741;--gold:#c9a84c;--gold-light:#e8c97a;--cream:#f5f0e8;--warm-white:#faf8f4;--text-dark:#1a1a1a;--text-mid:#4a4a4a;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--warm-white);color:var(--text-dark);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 60px;height:80px;display:flex;align-items:center;justify-content:space-between;background:rgba(15,28,15,0.95);backdrop-filter:blur(12px);}
+        .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#fff;letter-spacing:0.05em;text-decoration:none;}
+        .nav-logo span{color:var(--gold);}
+        .nav-links{display:flex;list-style:none;gap:40px;}
+        .nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s;position:relative;}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s;}
+        .nav-links a:hover{color:var(--gold-light);} .nav-links a:hover::after{width:100%;}
 
-    <!-- Navigation Bar (same as other pages) -->
-    <nav class="bg-green-800 text-white p-4 fixed w-full top-0 z-10 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Green Thumb Landscaping</h1>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="hover:text-green-300">Home</a></li>
-                <li><a href="about.html" class="hover:text-green-300">About</a></li>
-                <li><a href="services.html" class="hover:text-green-300">Services</a></li>
-                <li><a href="gallery.html" class="hover:text-green-300">Gallery</a></li>
-                <li><a href="contact.html" class="hover:text-green-300">Contact</a></li>
-            </ul>
-        </div>
+        /* PAGE HERO — atmospheric low morning light garden -->*/
+        .page-hero{padding-top:80px;position:relative;height:480px;overflow:hidden;}
+        .page-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.35);}
+        .page-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,28,15,0.1),rgba(15,28,15,0.82));}
+        .page-hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 80px 80px;}
+        .section-label{font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px;display:block;}
+        .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:300;color:#fff;line-height:1.1;max-width:700px;}
+        .page-title em{font-style:italic;color:var(--gold-light);}
+
+        /* CONTACT BODY */
+        .contact-section{display:grid;grid-template-columns:1fr 1fr;min-height:760px;}
+
+        /* FORM */
+        .form-side{padding:100px 80px;background:var(--warm-white);}
+        .form-side h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--forest);margin-bottom:48px;}
+        .form-group{margin-bottom:32px;}
+        .form-group label{display:block;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;font-weight:500;}
+        .form-group input,.form-group textarea{width:100%;padding:14px 0;border:none;border-bottom:1px solid #d4cfc4;background:transparent;font-family:'Montserrat',sans-serif;font-size:0.9rem;font-weight:300;color:var(--text-dark);outline:none;transition:border-color 0.3s;resize:none;}
+        .form-group input:focus,.form-group textarea:focus{border-bottom-color:var(--gold);}
+        .form-group textarea{height:120px;}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+        .btn-submit{display:inline-block;padding:18px 52px;background:var(--forest);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;border:none;cursor:pointer;transition:background 0.3s,transform 0.3s;margin-top:16px;width:100%;}
+        .btn-submit:hover{background:var(--gold);color:var(--deep);transform:translateY(-2px);}
+
+        /* INFO SIDE — with a background garden image -->*/
+        .info-side{position:relative;overflow:hidden;}
+        .info-side-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.25);}
+        .info-side-overlay{position:absolute;inset:0;background:rgba(15,28,15,0.7);}
+        .info-side-content{position:relative;z-index:2;padding:100px 80px;display:flex;flex-direction:column;justify-content:space-between;height:100%;}
+        .info-top h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;margin-bottom:48px;line-height:1.3;}
+        .info-top h2 em{font-style:italic;color:var(--gold-light);}
+        .contact-item{display:flex;gap:24px;margin-bottom:40px;align-items:flex-start;}
+        .contact-item-icon{width:44px;height:44px;border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;color:var(--gold);}
+        .contact-item-text label{display:block;font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+        .contact-item-text p{font-size:0.85rem;color:rgba(255,255,255,0.8);line-height:1.7;}
+        .info-divider{width:60px;height:1px;background:rgba(201,168,76,0.3);margin:0 0 32px;}
+        .info-note{font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.9;}
+
+        /* MAP */
+        .map-section{height:440px;overflow:hidden;}
+        .map-section iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(50%) brightness(0.8);}
+
+        footer{background:var(--deep);padding:80px;}
+        .footer-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:50px;}
+        .footer-brand{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;}
+        .footer-brand span{color:var(--gold);}
+        .footer-tagline{font-size:0.7rem;color:rgba(255,255,255,0.35);letter-spacing:0.15em;margin-top:8px;}
+        .footer-contacts{display:flex;gap:80px;}
+        .footer-col label{display:block;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+        .footer-col p{font-size:0.8rem;color:rgba(255,255,255,0.7);line-height:1.8;}
+        .footer-bottom{display:flex;justify-content:space-between;align-items:center;}
+        .footer-nav{display:flex;gap:36px;list-style:none;}
+        .footer-nav a{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.3s;}
+        .footer-nav a:hover{color:var(--gold);}
+        .footer-copy{font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.1em;}
+
+        @media(max-width:900px){
+            nav{padding:0 24px;} .nav-links{gap:20px;}
+            .page-hero{height:360px;} .page-hero-content{padding:0 32px 60px;}
+            .contact-section{grid-template-columns:1fr;}
+            .form-side,.info-side-content{padding:60px 32px;}
+            .form-row{grid-template-columns:1fr;gap:0;}
+            .info-side{min-height:500px;}
+            footer{padding:60px 32px;} .footer-top{flex-direction:column;gap:48px;}
+            .footer-contacts{flex-direction:column;gap:32px;} .footer-bottom{flex-direction:column;gap:24px;}
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">Green<span> Thumb</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
     </nav>
 
-    <!-- Spacer for fixed nav -->
-    <div class="h-20"></div>
-
-    <!-- Contact Hero / Intro -->
-    <section class="py-20 bg-white text-center">
-        <div class="container mx-auto px-4">
-            <h1 class="text-5xl font-bold text-green-800 mb-6">Get in Touch</h1>
-            <p class="text-xl max-w-3xl mx-auto">
-                Ready to transform your outdoor space? Fill out the form below or reach us via WhatsApp/phone for a free consultation and quote.
-            </p>
+    <!-- PAGE HERO — Golden hour garden with warm beautiful light -->
+    <div class="page-hero">
+        <img class="page-hero-img"
+             src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=85&w=2000"
+             alt="Beautiful garden at golden hour"
+             onerror="this.src='https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=85&w=2000';">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="section-label">Let's Talk</span>
+            <h1 class="page-title">Begin your <em>transformation</em> today</h1>
         </div>
-    </section>
+    </div>
 
-    <!-- Contact Form + Info + Map -->
-    <section class="py-16 bg-green-100">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                
-                <!-- Form Column -->
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h2 class="text-3xl font-bold text-green-700 mb-8">Send Us a Message</h2>
-                    
-                    <!-- FORM START – Paste your Formspree endpoint here -->
-                    <form action="https://formspree.io/f/xeerqlvl" method="POST" class="space-y-6">
-                        
-                        <!-- Name -->
-                        <div>
-                            <label for="name" class="block text-lg font-medium mb-2">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
-                        
-                        <!-- Email -->
-                        <div>
-                            <label for="email" class="block text-lg font-medium mb-2">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
-                        
-                        <!-- Phone/WhatsApp -->
-                        <div>
-                            <label for="phone" class="block text-lg font-medium mb-2">Phone / WhatsApp Number</label>
-                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
-                        
-                        <!-- Message -->
-                        <div>
-                            <label for="message" class="block text-lg font-medium mb-2">Your Message / Project Details</label>
-                            <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
-                        </div>
-                        
-                        <!-- Submit Button -->
-                        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg text-lg w-full transition-colors">
-                            Send Message
-                        </button>
-                    </form>
-                    <!-- FORM END -->
+    <div class="contact-section">
+        <div class="form-side">
+            <h2>Send us a message</h2>
+            <form action="https://formspree.io/f/xeerqlvl" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
                 </div>
-                
-                <!-- Info + Map Column -->
-                <div class="space-y-8">
-                    <div>
-                        <h2 class="text-3xl font-bold text-green-700 mb-6">Contact Information</h2>
-                        <ul class="space-y-6 text-lg">
-                            <li class="flex items-start">
-                                <span class="text-3xl mr-4">📞</span>
-                                <div>
-                                    <p class="font-semibold">Phone / WhatsApp</p>
-                                    <p>+265 999 123 456</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-3xl mr-4">✉️</span>
-                                <div>
-                                    <p class="font-semibold">Email</p>
-                                    <p>info@greenthumblandscaping.com</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-3xl mr-4">📍</span>
-                                <div>
-                                    <p class="font-semibold">Location</p>
-                                    <p>Lilongwe, Malawi</p>
-                                </div>
-                            </li>
-                        </ul>
+                <div class="form-group">
+                    <label for="phone">Phone / WhatsApp</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+265 999 ...">
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" required placeholder="Tell us about your space and what you're envisioning..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+
+        <!-- INFO SIDE — Background image: lush garden detail -->
+        <div class="info-side">
+            <div class="info-side-bg"
+                 style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1400');">
+            </div>
+            <div class="info-side-overlay"></div>
+            <div class="info-side-content">
+                <div class="info-top">
+                    <h2>We'd love to hear about your <em>dream garden</em></h2>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📞</div>
+                        <div class="contact-item-text">
+                            <label>Phone / WhatsApp</label>
+                            <p>+265 999 123 456</p>
+                        </div>
                     </div>
-                    
-                    <!-- Google Maps Embed -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-green-700 mb-4">Find Us</h3>
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3854.9999999999995!2d33.774!3d-13.953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18f8a!2sLilongwe!5e0!3m2!1sen!2smw!4v1690000000000!5m2!1sen!2smw" 
-                            width="100%" 
-                            height="400" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">✉</div>
+                        <div class="contact-item-text">
+                            <label>Email</label>
+                            <p>info@greenthumblandscaping.com</p>
+                        </div>
                     </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">📍</div>
+                        <div class="contact-item-text">
+                            <label>Location</label>
+                            <p>Lilongwe, Malawi</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-divider"></div>
+                    <p class="info-note">We typically respond within 24 hours. For urgent enquiries, WhatsApp is the fastest way to reach us. Free site consultations available Monday to Saturday.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer (same as other pages) -->
-    <footer class="bg-green-900 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-4">Green Thumb Landscaping</h3>
-            <p class="mb-4">Expert landscaping services in Lilongwe, Malawi</p>
-            
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mb-6">
-                <div>
-                    <p class="font-semibold">Phone / WhatsApp:</p>
-                    <p>+265 999 123 456</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Email:</p>
-                    <p>info@greenthumblandscaping.com</p>
-                </div>
-                <div>
-                    <p class="font-semibold">Location:</p>
-                    <p>Lilongwe, Malawi</p>
-                </div>
+    <div class="map-section">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3854.9999999999995!2d33.774!3d-13.953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18f8a!2sLilongwe!5e0!3m2!1sen!2smw!4v1690000000000!5m2!1sen!2smw"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <footer>
+        <div class="footer-top">
+            <div><div class="footer-brand">Green <span>Thumb</span> Landscaping</div><p class="footer-tagline">Exceptional outdoor environments — Lilongwe, Malawi</p></div>
+            <div class="footer-contacts">
+                <div class="footer-col"><label>Phone / WhatsApp</label><p>+265 999 123 456</p></div>
+                <div class="footer-col"><label>Email</label><p>info@greenthumblandscaping.com</p></div>
+                <div class="footer-col"><label>Location</label><p>Lilongwe, Malawi</p></div>
             </div>
-            
-            <p class="text-sm">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
+        </div>
+        <div class="footer-bottom">
+            <ul class="footer-nav">
+                <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li><li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2026 Green Thumb Landscaping. All rights reserved.</p>
         </div>
     </footer>
-
 </body>
 </html>
